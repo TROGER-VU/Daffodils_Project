@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Voice Shopping Assistant",
   description: "Voice-based shopping list manager with smart suggestions",
+  icons: [
+      { rel: 'icon', url: '/logo.png', type: 'image/x-icon' }
+    ]
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
