@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Organic Apples",
+    "brand": "Farm Fresh",
+    "category": "produce",
+    "price": 3.99,
+    "unit": "lb"
+  },
+  {
+    "id": 2,
+    "name": "Milk 2%",
+    "brand": "DairyPure",
+    "category": "dairy",
+    "price": 2.49,
+    "unit": "half-gallon"
+  },
+  {
+    "id": 3,
+    "name": "Almond Milk Unsweetened",
+    "brand": "Silk",
+    "category": "dairy",
+    "price": 3.49,
+    "unit": "half-gallon"
+  },
+  {
+    "id": 4,
+    "name": "Whole Wheat Bread",
+    "brand": "Nature's Own",
+    "category": "bakery",
+    "price": 2.99,
+    "unit": "loaf"
+  },
+  {
+    "id": 5,
+    "name": "Bananas",
+    "brand": "Chiquita",
+    "category": "produce",
+    "price": 0.69,
+    "unit": "lb"
+  },
+  {
+    "id": 6,
+    "name": "Toothpaste",
+    "brand": "Colgate",
+    "category": "personal care",
+    "price": 4.49,
+    "unit": "tube"
+  },
+  {
+    "id": 7,
+    "name": "Bottled Water",
+    "brand": "Aquafina",
+    "category": "beverages",
+    "price": 5.99,
+    "unit": "24-pack"
+  },
+  {
+    "id": 8,
+    "name": "Eggs",
+    "brand": "Happy Hen",
+    "category": "dairy",
+    "price": 2.99,
+    "unit": "dozen"
+  },
+  {
+    "id": 9,
+    "name": "Cheddar Cheese",
+    "brand": "Kraft",
+    "category": "dairy",
+    "price": 4.79,
+    "unit": "8 oz"
+  },
+  {
+    "id": 10,
+    "name": "Orange Juice",
+    "brand": "Tropicana",
+    "category": "beverages",
+    "price": 3.99,
+    "unit": "59 oz"
+  },
+  {
+    "id": 11,
+    "name": "Chicken Breast",
+    "brand": "Tyson",
+    "category": "meat",
+    "price": 6.99,
+    "unit": "lb"
+  },
+  {
+    "id": 12,
+    "name": "Broccoli",
+    "brand": "Green Giant",
+    "category": "produce",
+    "price": 1.99,
+    "unit": "lb"
+  },
+  {
+    "id": 13,
+    "name": "Rice",
+    "brand": "Daawat",
+    "category": "pantry",
+    "price": 9.99,
+    "unit": "10 lb bag"
+  },
+  {
+    "id": 14,
+    "name": "Pasta",
+    "brand": "Barilla",
+    "category": "pantry",
+    "price": 1.49,
+    "unit": "16 oz"
+  },
+  {
+    "id": 15,
+    "name": "Tomato Sauce",
+    "brand": "Hunt's",
+    "category": "pantry",
+    "price": 2.29,
+    "unit": "24 oz jar"
+  },
+  {
+    "id": 16,
+    "name": "Potato Chips",
+    "brand": "Lays",
+    "category": "snacks",
+    "price": 3.29,
+    "unit": "bag"
+  },
+  {
+    "id": 17,
+    "name": "Ice Cream",
+    "brand": "Ben & Jerry's",
+    "category": "frozen",
+    "price": 5.49,
+    "unit": "pint"
+  },
+  {
+    "id": 18,
+    "name": "Shampoo",
+    "brand": "Head & Shoulders",
+    "category": "personal care",
+    "price": 6.99,
+    "unit": "13.5 oz"
+  },
+  {
+    "id": 19,
+    "name": "Paper Towels",
+    "brand": "Bounty",
+    "category": "household",
+    "price": 12.99,
+    "unit": "6 rolls"
+  },
+  {
+    "id": 20,
+    "name": "Coffee",
+    "brand": "Nescafé",
+    "category": "beverages",
+    "price": 8.49,
+    "unit": "12 oz jar"
+  }
+]
