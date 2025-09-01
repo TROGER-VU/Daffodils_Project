@@ -2,7 +2,8 @@
 
 A **voice-controlled shopping list app** built with **Next.js + TypeScript + Zustand**, supporting **multilingual speech recognition**, **translation to English**, **product dataset pricing**, and **smart suggestions**.
 
-Deployed live at 👉 [https://daffodils-project.vercel.app/](https://daffodils-project.vercel.app/)
+Deployed live at 👉 [https://daffodils-project.vercel.app/]
+Github 👉 [https://github.com/TROGER-VU/Daffodils_Project]
 
 ## 🔹 Brief Approach (200 words)
 
@@ -38,7 +39,7 @@ Additionally, a **Voice-Activated Search** allows users to find items under budg
 * 🔍 **Voice-Activated Search**
   Search products by voice:
 
-  > “Find organic apples under 5 dollars”
+  > “Find organic apples under 100 rupees”
 
 * 📋 **Shopping Cart Management**
 
