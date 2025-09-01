@@ -5,6 +5,7 @@ import { useStore } from '@/store/useStore';
 import { parseCommand } from '@/lib/nlp';
 import { categories, substitutes, seasonalByMonth } from '@/lib/data';
 import { Mic, Trash2, Sparkles, Search, Languages } from 'lucide-react';
+import toast, { Toaster } from "react-hot-toast";
 
 // Add missing browser types
 declare global {
@@ -113,9 +114,13 @@ export default function HomePage() {
       cmd.items.forEach(({ item, quantity }) => {
         const product = getProductDetails(item);
         addItem(item, quantity, product.category || categories[item as keyof typeof categories], product.price ?? 10);
+        toast.success(`${quantity} × ${item} added`);
       });
     } else if (cmd.intent === "remove") {
-      cmd.items.forEach(({ item, quantity }) => removeItem(item, quantity));
+      cmd.items.forEach(({ item, quantity }) => {
+        removeItem(item, quantity);
+        toast(`${(quantity ?? 1) > 1 ? (quantity ?? 1) + " × " : ""}${item} removed`, { icon: "🗑️" });
+      });
     } else if (cmd.intent === "modify") {
       if (cmd.item) setQuantity(cmd.item.trim(), cmd.quantity);
     } else if (cmd.intent === "search") {
@@ -129,6 +134,7 @@ export default function HomePage() {
     }
   } catch (err) {
     console.error("Voice handling failed:", err);
+    toast.error("⚠️ Could not process voice command");
   }
 };
 
@@ -156,6 +162,7 @@ export default function HomePage() {
 
   return (
     <main className="space-y-6">
+      <Toaster />
         <h1 className="text-2xl font-bold">🛒 Voice Shopping Assistant</h1>
       <header className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -192,8 +199,8 @@ export default function HomePage() {
             <button
               onClick={() => {
                 if (confirm('Clear all items?')) {
-                  // ✅ clear items properly
                   useStore.getState().clear();
+                  toast("Shopping list cleared", { icon: "🧹" });
                 }
               }}
               className="text-xs opacity-70 hover:opacity-100 flex items-center gap-1"
@@ -211,7 +218,7 @@ export default function HomePage() {
                   <div>
                     <div className="font-medium capitalize">{i.name}</div>
                     <div className="text-xs opacity-70">
-                      Qty: {i.quantity} × ${itemPrice} = <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                      Qty: {i.quantity} × ₹{itemPrice} = <span className="font-semibold">₹{subtotal.toFixed(2)}</span>
                       {i.category ? ` • ${i.category}` : ''}
                     </div>
                   </div>
@@ -224,7 +231,7 @@ export default function HomePage() {
                       className="w-16 bg-neutral-900 border border-neutral-700 rounded px-2 py-1 text-sm"
                       aria-label={`Set quantity for ${i.name}`}
                     />
-                    <button onClick={() => removeItem(i.name)} className="text-sm underline">Remove</button>
+                    <button onClick={() => {removeItem(i.name); toast(`${i.name} removed`, { icon: "🗑️" })}}  className="text-sm underline">Remove</button>
                   </div>
                 </li>
               );
@@ -235,7 +242,7 @@ export default function HomePage() {
           </ul>
           {items.length > 0 && (
             <div className="mt-3 text-right font-semibold">
-              Total: $
+              Total: ₹
               {items.reduce((sum, i) => sum + (i.price ?? 10) * i.quantity, 0).toFixed(2)}
             </div>
           )}
@@ -310,13 +317,13 @@ export default function HomePage() {
 
       <section className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 space-y-3">
         <h2 className="font-semibold flex items-center gap-2"><Search size={16}/> Voice-Activated Search</h2>
-        <div className="text-sm opacity-80">Say “Find organic apples under 5 dollars” or “Find toothpaste under 5”.</div>
+        <div className="text-sm opacity-80">Say “Find organic apples under 100 rupees” or “Find toothpaste under 5”.</div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
           {searchResults.map(p => (
             <div key={p.id} className="rounded-xl border border-neutral-800 p-3">
               <div className="font-medium">{p.name}</div>
               <div className="text-xs opacity-70">{p.brand} • {p.category}</div>
-              <div className="mt-1 text-sm">${p.price} / {p.unit}</div>
+              <div className="mt-1 text-sm">₹{p.price} / {p.unit}</div>
               <button onClick={() => addItem(p.name, 1, p.category, p.price)} className="mt-2 text-sm underline">Add</button>
             </div>
           ))}
@@ -332,7 +339,7 @@ export default function HomePage() {
             <div key={p.id} className="rounded-xl border border-neutral-800 p-3">
               <div className="font-medium">{p.name}</div>
               <div className="text-xs opacity-70">{p.brand} • {p.category}</div>
-              <div className="mt-1 text-sm">${p.price} / {p.unit}</div>
+              <div className="mt-1 text-sm">₹{p.price} / {p.unit}</div>
               <button
                 onClick={() => addItem(p.name, 1, p.category, p.price)}
                 className="mt-2 text-sm underline"

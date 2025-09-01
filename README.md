@@ -1,36 +1,147 @@
-# Voice Command Shopping Assistant (Next.js 14, App Router)
+# 🛒 Voice Shopping Assistant
 
-A voice-first shopping list manager with smart suggestions, multilingual voice input, and voice-activated product search.
+A **voice-controlled shopping list app** built with **Next.js + TypeScript + Zustand**, supporting **multilingual speech recognition**, **translation to English**, **product dataset pricing**, and **smart suggestions**.
 
-## Features
+Deployed live at 👉 [https://daffodils-project.vercel.app/](https://daffodils-project.vercel.app/)
 
-- 🎙️ **Voice Input (Web Speech API)** — add/remove/modify items, list and voice search
-- 🌐 **Multilingual** — easily switch recognition language (en-US, en-IN, hi-IN, es-ES, fr-FR)
-- 🧠 **NLP** — simple rule-based parser for add/remove/modify/search/quantity
-- 🧾 **Shopping List** — local persistence via `localStorage`, categories & quantities
-- 💡 **Smart Suggestions** — based on your recent history and current seasonal produce
-- 🔎 **Voice Search** — local product dataset with filters (`under $X`, `by BRAND`)
-- ♿ **A11y** — semantic buttons/labels, keyboard-friendly
-- 🚀 **Ready for Vercel** — zero config deploy
+## 🔹 Brief Approach (200 words)
 
-## Local Development
+This project is built as a **voice shopping assistant** that combines speech recognition, natural language parsing, translation, and contextual product recommendations into a single user-friendly interface. The application listens continuously to the user’s voice commands (using the Web Speech API) and automatically converts them into structured intents such as **add, remove, modify, or search items**. To support multilingual input, every spoken command is first passed through a lightweight translation API (`google-translate-api-x`), which standardizes the text into English before parsing.
+
+Once processed, the input is matched against a **product dataset (`products.json`)** that contains product names, categories, and prices. This ensures that items added to the shopping list reflect their real category and price instead of generic placeholders. To enhance personalization, the app also provides **three smart suggestion categories**:
+
+* 📌 History-based items (recently purchased)
+* 🔄 Alternatives (substitutes for current items)
+* 🌱 Seasonal picks (based on month)
+
+Additionally, a **Voice-Activated Search** allows users to find items under budget or from specific brands. For better UX, we integrated **React Hot Toast** for success/error feedback. The project is fully client-side, fast, and deploys seamlessly on **Vercel**.
+
+---
+
+## ✨ Features
+
+* 🎙️ **Continuous Speech Recognition**
+  Add, remove, search, or modify items with voice commands. Recognition runs until you press **Stop**.
+
+* 🌍 **Multilingual Input with Translation**
+  Supports multiple languages (English, Hindi, Spanish, French, etc.) using [`google-translate-api-x`](https://www.npmjs.com/package/google-translate-api-x).
+
+* 📦 **Product Dataset with Prices**
+  Items automatically fetch real prices, categories, and units from `/data/products.json`.
+
+* 💡 **Smart Suggestions**
+
+  * From purchase history
+  * Alternatives (substitutes)
+  * Seasonal picks (month-wise)
+
+* 🔍 **Voice-Activated Search**
+  Search products by voice:
+
+  > “Find organic apples under 5 dollars”
+
+* 📋 **Shopping Cart Management**
+
+  * Add, remove, and update quantities
+  * View total cost
+  * Reset the entire list
+
+* 🔔 **User Feedback via Toasts**
+
+  * Add / Remove item confirmation
+  * Error or not-found alerts
+  * Clean, modern notifications with [React Hot Toast](https://react-hot-toast.com)
+
+* 📊 **Top Picks Section**
+  Randomized recommendations from the dataset.
+
+* 💾 **Offline Ready**
+  Works with browser storage (Zustand + localStorage).
+
+---
+
+## 🛠️ Tech Stack
+
+* **Frontend:** Next.js 14, TypeScript, TailwindCSS
+* **State Management:** Zustand
+* **Speech Recognition:** Web Speech API (Chrome recommended)
+* **Translation:** `google-translate-api-x`
+* **UI Components:** `lucide-react`, TailwindCSS
+* **Notifications:** React Hot Toast
+* **Data:** JSON dataset (`/data/products.json`) with 20 items
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-pnpm i   # or npm i / yarn
-pnpm dev # http://localhost:3000
+git clone https://github.com/TROGER-VU/Daffodils_Project.git
+cd Daffodils_Project
 ```
 
-## Deploy to Vercel
+### 2. Install dependencies
 
-- Push to GitHub, import in Vercel, and deploy.
-- No env vars required by default.
+```bash
+npm install
+```
 
-> Optional: If you want cloud-based NLP or embeddings, add your API keys as Vercel Environment Variables and extend `lib/nlp.ts` or `/app/api/*` routes.
+### 3. Run the development server
 
-## Tech
+```bash
+npm run dev
+```
 
-- Next.js 14 (App Router), TypeScript, Tailwind, Zustand
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 200-word approach
+---
 
-This app focuses on **reliability** and **low-latency** by keeping the core loop entirely in the browser. Voice input uses the Web Speech API with a minimal, resilient UI. A **rule-based NLP** parser (`lib/nlp.ts`) translates common phrasings into intents: add, remove, modify, list, and search; it extracts quantities from numerals and words (e.g., “two”). Smart suggestions combine **recency** (user history stored locally) with **seasonal items** keyed to the current month. Items are auto-categorized using a lightweight map and rendered in a clear, touch-friendly list with quantity controls. Voice search queries a bundled product dataset via a **serverless API route** (`/api/search`) with brand and price filters (e.g., “under $5”). The state layer uses **Zustand** and persists to `localStorage` for instant, offline-friendly behavior. The UI employs Tailwind for a clean, mobile-first layout and accessibility-first semantics. The project is **production ready for Vercel** with strict TypeScript, sensible headers, and no required secrets. It is easy to extend with real catalogs, sales feeds, or LLM-powered suggestions, while keeping the default stack simple, dependency-light, and fast.
+## 🧑‍💻 Usage
+
+* Click **Start Voice** and say commands:
+
+  * “Add 2 bananas” 🍌
+  * “Remove milk” 🥛
+  * “Find toothpaste under 5” 🦷
+* Change language from the dropdown (Hindi, Spanish, French).
+* Reset shopping list with the **Reset** button.
+* See **smart suggestions** and **top picks**.
+
+---
+
+## 📂 Project Structure
+
+```
+/src
+ ├── app/page.tsx         # Main page with voice shopping assistant
+ ├── lib/nlp.ts           # Natural language parser for voice input
+ ├── lib/data.ts          # Categories, substitutes, seasonal items
+ ├── store/useStore.ts    # Zustand store for shopping list
+ ├── pages/api/translate  # Translation API route
+ └── data/products.json   # Product dataset (20 items)
+```
+
+---
+
+## 📌 Roadmap
+
+* [ ] Support **more languages** (auto-detect)
+* [ ] Add **voice feedback** (text-to-speech)
+* [ ] Export shopping list as PDF / CSV
+* [ ] User accounts with cloud sync
+
+---
+
+## 🙌 Acknowledgements
+
+* [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+* [google-translate-api-x](https://www.npmjs.com/package/google-translate-api-x)
+* [React Hot Toast](https://react-hot-toast.com)
+* [Zustand](https://github.com/pmndrs/zustand)
+
+---
+
+⚡ Built by Ayush Gupta — *because shopping lists should be smart, simple, and fun!*
+
+---
